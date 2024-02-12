@@ -13,6 +13,9 @@ import { auth } from "../Config/firebase";
 
 import Slide from "@mui/material/Slide";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
+import { netflix_bg_img, user_avatar } from "../utils/constants";
 
 function TransitionLeft(props) {
   return <Slide {...props} direction="left" />;
@@ -20,6 +23,8 @@ function TransitionLeft(props) {
 
 const Login = () => {
   const [isSignIn, setSignIn] = useState(false);
+
+  const dispatch = useDispatch();
 
   const email = useRef(null);
   const password = useRef(null);
@@ -53,7 +58,6 @@ const Login = () => {
           .then((usercredentials) => {
             console.log(usercredentials.user);
             console.log("Successfully signed in with firebase auth");
-            navigate("/browse");
           })
           .catch((error) => {
             console.log(error);
@@ -71,10 +75,20 @@ const Login = () => {
             setSignIn(!isSignIn);
 
             updateProfile(usercredential.user, {
-              displayName: name.current.value,
-              photoURL: "https://avatars.githubusercontent.com/u/106985034?v=4",
+              displayName: name?.current?.value,
+              photoURL: user_avatar,
             })
               .then(() => {
+                const { uid, email, displayName, photoURL } = auth.currentUser;
+
+                const userObj = {
+                  uid: uid,
+                  email: email,
+                  displayName: displayName,
+                  photoURL: photoURL,
+                };
+
+                dispatch(addUser(userObj));
                 console.log(
                   "user profile display name and photoUrl added successfully"
                 );
@@ -105,11 +119,7 @@ const Login = () => {
   return (
     <div className="">
       <Header />
-      <img
-        className="absolute"
-        src="https://maven-uploads.s3.amazonaws.com/120386748/projects/netflix%20image.jpg"
-        alt="bgimage"
-      />
+      <img className="absolute" src={netflix_bg_img} alt="bgimage" />
 
       <form
         onSubmit={(e) => e.preventDefault()}
