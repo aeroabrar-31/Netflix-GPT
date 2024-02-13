@@ -8,7 +8,7 @@ const SecondaryContainer = () => {
   const popular = useSelector((store) => store.movies.popularMovies);
   const topRated = useSelector((store) => store.movies.topRatedMovies);
   // console.log(movies);
-  // if (!movies) return;
+  if (!nowPlaying || !upcoming || !popular || !topRated) return;
   return (
     <div className="bg-black text-white">
       <MovieList movies={nowPlaying} title={"Now Playing"} />
