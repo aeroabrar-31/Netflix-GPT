@@ -2,7 +2,7 @@ import { signOut } from "firebase/auth";
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { Button } from "@mui/material";
+import { Avatar, Button } from "@mui/material";
 
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../Config/firebase";
@@ -64,13 +64,11 @@ const Header = () => {
 
           {
             <div className="flex p-2">
-              <img
+              <Avatar
                 src={temp?.photoURL}
-                className="w-10 h-10 rounded-lg mx-2"
-              ></img>
-              <Button onClick={handleSignOut} variant="contained" color="error">
-                {temp?.displayName}
-              </Button>
+                sx={{ width: 45, height: 45 }}
+              ></Avatar>
+              <button onClick={handleSignOut}>{temp?.displayName}</button>
             </div>
           }
         </div>
