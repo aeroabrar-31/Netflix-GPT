@@ -11,7 +11,7 @@ const VideoBackground = ({ id }) => {
   return (
     <div className="">
       <iframe
-        className="w-[100%] aspect-video"
+        className=" w-[100%] aspect-video"
         src={videoUrl}
         title="YouTube video player"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
