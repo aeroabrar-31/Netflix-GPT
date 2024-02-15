@@ -1,3 +1,5 @@
+import OpenAI from "openai";
+
 export const netflix_logo =
   "https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png";
 
@@ -17,3 +19,8 @@ export const API_OPTIONS = {
 };
 
 export const POSTER_IMG_URL = "https://image.tmdb.org/t/p/w200";
+
+export const openAI = new OpenAI({
+  apiKey: "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",
+  dangerouslyAllowBrowser: true, // This is the default and can be omitted
+});

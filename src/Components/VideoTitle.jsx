@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 const VideoTitle = ({ title, overview }) => {
   return (
     <div className="w-screen aspect-video pt-[15%] px-12 absolute bg-gradient-to-r from-black text-white">
-      <h1 className="font-bold text-4xl">{title}</h1>
+      <h1 className="font-bold text-3xl">{title}</h1>
       <h1 className="w-[25%] py-5">{overview}</h1>
 
       <div>
