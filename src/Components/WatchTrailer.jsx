@@ -8,7 +8,7 @@ const WatchTrailer = () => {
   const videoUrl = useMovieTrailer(trailerId);
   return (
     <div>
-      <Header />
+      {/*  <Header /> */}
       <div className="">
         <iframe
           className=" w-[100%] aspect-video"

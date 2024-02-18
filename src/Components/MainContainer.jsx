@@ -8,7 +8,7 @@ const MainContainer = () => {
   if (!movies) return;
   // console.log(movies);
   const randomIndex = Math.floor(Math.random() * 20);
-  const tt = movies[7];
+  const tt = movies[8];
   const { title, overview, id } = tt;
   console.log(tt);
 

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { API_OPTIONS } from "../utils/constants";
 import { addMovies } from "../utils/suggestionsSlice";
 import MovieList from "./MovieList";
+import GptMovieList from "./GptMovieList";
 
 const GptMovieSuggestions = () => {
   const movieNames = useSelector((store) => store.suggestions.movieNames);
@@ -20,8 +21,8 @@ const GptMovieSuggestions = () => {
   if (!movies) return;
 
   return (
-    <div>
-      <MovieList movies={movies} title={"Top 10 movies"} />
+    <div className="">
+      <GptMovieList movies={movies} title={"Top 10 movies"} />
     </div>
   );
 };
