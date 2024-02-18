@@ -1,47 +1,29 @@
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { API_OPTIONS } from "../utils/constants";
+import { addMovies } from "../utils/suggestionsSlice";
+import MovieList from "./MovieList";
 
 const GptMovieSuggestions = () => {
+  const movieNames = useSelector((store) => store.suggestions.movieNames);
   const movies = useSelector((store) => store.suggestions.movies);
-  console.log(movies);
 
-  const fetchMovieDetails = async (moviename) => {
-    const data = await fetch(
-      "https://api.themoviedb.org/3/search/movie?query=" + moviename,
-      API_OPTIONS
-    );
+  console.log(movieNames);
 
-    const jsondata = await data.json();
-
-    // console.log("====================================");
-    // console.log(jsondata);
-    // console.log("====================================");
-    return jsondata.results;
-  };
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    if (movies) {
-      const promisearray = movies.map((movie) => {
-        return fetchMovieDetails(movie);
-      });
-      fullfillPromises(promisearray);
+    if (movieNames) {
     }
   }, []);
 
-  const fullfillPromises = async (prom) => {
-    const res = await Promise.all(prom);
-    console.log(res);
+  if (!movies) return;
 
-    const actualResult = res.map((movie) => {
-      return movie[0];
-    });
-    console.log("====================================");
-    console.log(actualResult);
-    console.log("====================================");
-  };
-
-  return <div>GptMovieSuggestions</div>;
+  return (
+    <div>
+      <MovieList movies={movies} title={"Top 10 movies"} />
+    </div>
+  );
 };
 
 export default GptMovieSuggestions;

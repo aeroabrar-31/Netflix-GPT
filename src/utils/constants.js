@@ -21,6 +21,6 @@ export const API_OPTIONS = {
 export const POSTER_IMG_URL = "https://image.tmdb.org/t/p/w200";
 
 export const openAI = new OpenAI({
-  apiKey: "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",
+  apiKey: process.env.REACT_APP_OPENAI_KEY,
   dangerouslyAllowBrowser: true, // This is the default and can be omitted
 });

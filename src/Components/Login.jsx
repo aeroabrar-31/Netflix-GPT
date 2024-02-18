@@ -58,6 +58,7 @@ const Login = () => {
           .then((usercredentials) => {
             console.log(usercredentials.user);
             console.log("Successfully signed in with firebase auth");
+            navigate("/browse");
           })
           .catch((error) => {
             console.log(error);
@@ -76,7 +77,7 @@ const Login = () => {
 
             updateProfile(usercredential.user, {
               displayName: name?.current?.value,
-              photoURL: user_avatar,
+              // photoURL: user_avatar,
             })
               .then(() => {
                 const { uid, email, displayName, photoURL } = auth.currentUser;

@@ -13,6 +13,36 @@ import { toggleGpt } from "../utils/gptSlice";
 import { setLanguage } from "../utils/LanguageSlice";
 import { langConst } from "../utils/langConstants";
 
+function stringAvatar(name) {
+  if (!name) return;
+  return {
+    sx: {
+      bgcolor: stringToColor(name),
+    },
+    children: `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`,
+  };
+}
+function stringToColor(string) {
+  if (!string) return;
+  let hash = 0;
+  let i;
+
+  /* eslint-disable no-bitwise */
+  for (i = 0; i < string.length; i += 1) {
+    hash = string.charCodeAt(i) + ((hash << 5) - hash);
+  }
+
+  let color = "#";
+
+  for (i = 0; i < 3; i += 1) {
+    const value = (hash >> (i * 8)) & 0xff;
+    color += `00${value.toString(16)}`.slice(-2);
+  }
+  /* eslint-enable no-bitwise */
+
+  return color;
+}
+
 const Header = () => {
   const navigate = useNavigate();
 
@@ -45,7 +75,6 @@ const Header = () => {
         };
 
         dispatch(addUser(userObj));
-        navigate("/browse");
       } else {
         dispatch(removeUser());
         navigate("/");
@@ -64,17 +93,26 @@ const Header = () => {
       });
   };
 
+  // const navigate=useNavigate();
+  const handleHome = () => {
+    navigate("/browse");
+  };
+
   return (
     <div>
       {!temp && (
-        <div className="absolute  px-4 py-2 bg-gradient-to-b z-10 from-black">
-          <img className="w-40" src={netflix_logo} />
+        <div className="absolute cursor-pointer px-4 py-2 bg-gradient-to-b z-10 from-black">
+          <img className="w-40" onClick={handleHome} src={netflix_logo} />
         </div>
       )}
 
       {temp && (
         <div className="absolute flex w-screen justify-between px-4 py-2 bg-gradient-to-b z-10 from-black">
-          <img className="w-40" src={netflix_logo} />
+          <img
+            className="w-40 cursor-pointer"
+            onClick={handleHome}
+            src={netflix_logo}
+          />
 
           {
             <div className="flex py-4">
@@ -95,7 +133,7 @@ const Header = () => {
               </button>
               <div className="cursor-pointer">
                 <Avatar
-                  src={temp?.photoURL}
+                  {...stringAvatar(temp?.displayName)}
                   sx={{ width: 45, height: 45, marginRight: 4 }}
                   onClick={handleSignOut}
                 ></Avatar>

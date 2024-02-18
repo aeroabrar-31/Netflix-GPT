@@ -6,7 +6,7 @@ import GptMovieSuggestions from "./GptMovieSuggestions";
 const GptPage = () => {
   return (
     <div>
-      <img className="absolute w-screen" src={netflix_bg_img} alt="bgimage" />
+      <img className="absolute w-screen " src={netflix_bg_img} alt="bgimage" />
       <GptSearchBar />
       <GptMovieSuggestions />
     </div>

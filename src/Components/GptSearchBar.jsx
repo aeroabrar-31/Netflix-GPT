@@ -1,8 +1,8 @@
 import React, { useRef } from "react";
 import { langConst } from "../utils/langConstants";
 import { useDispatch, useSelector } from "react-redux";
-import { openAI } from "../utils/constants";
-import { addMovies } from "../utils/suggestionsSlice";
+import { API_OPTIONS, openAI } from "../utils/constants";
+import { addMovieNames, addMovies } from "../utils/suggestionsSlice";
 import { LoadingButton } from "@mui/lab";
 import { Search } from "@mui/icons-material";
 
@@ -19,9 +19,9 @@ const GptSearchBar = () => {
 
   async function main(msg) {
     const gptQuery =
-      "Act as movie recommendation system and give 10 movie suggestions for " +
+      "Act as movie recommendation system, give 10 movie suggestions and only give me names of the movies in comma separated values for " +
       msg +
-      " and only give me names of the movies in comma separated values like the example: Hera Pheri, God Father, Spider Man, Oppenheimer, Marvels etc.";
+      " like the example: Hera Pheri, God Father, Spider Man, Oppenheimer, Marvels etc.";
 
     const chatCompletion = await openAI.chat.completions.create({
       messages: [
@@ -38,8 +38,47 @@ const GptSearchBar = () => {
     const movieArray = moviesString.split(", ");
     console.log(movieArray);
 
-    dispatch(addMovies(movieArray));
+    const promisearray = movieArray.map((movie) => {
+      return fetchMovieDetails(movie);
+    });
+    fullfillPromises(promisearray);
+
+    dispatch(addMovieNames(movieArray));
   }
+
+  const fetchMovieDetails = async (moviename) => {
+    const data = await fetch(
+      "https://api.themoviedb.org/3/search/movie?query=" + moviename,
+      API_OPTIONS
+    );
+
+    const jsondata = await data.json();
+
+    // console.log("====================================");
+    // console.log(jsondata);
+    // console.log("====================================");
+    return jsondata.results;
+  };
+
+  const fullfillPromises = async (prom) => {
+    const res = await Promise.all(prom);
+    console.log(res);
+
+    let actualResult = [];
+
+    for (let index = 0; index < res.length; index++) {
+      const element = res[index];
+
+      for (let j = 0; j < element.length; j++) {
+        actualResult.push(element[j]);
+      }
+    }
+
+    actualResult = res.map((mov) => mov[0]);
+    console.log(actualResult);
+
+    dispatch(addMovies(actualResult));
+  };
 
   return (
     <div className="relative  pt-[6%] flex justify-center">
