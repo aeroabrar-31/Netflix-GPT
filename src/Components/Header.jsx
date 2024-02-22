@@ -14,7 +14,7 @@ import { setLanguage } from "../utils/LanguageSlice";
 import { langConst } from "../utils/langConstants";
 
 function stringAvatar(name) {
-  if (!name) return;
+  if (!name) return null;
   return {
     sx: {
       bgcolor: stringToColor(name),
@@ -73,7 +73,7 @@ const Header = () => {
           displayName: displayName,
           photoURL: photoURL,
         };
-
+        navigate("/browse");
         dispatch(addUser(userObj));
       } else {
         dispatch(removeUser());
@@ -107,16 +107,16 @@ const Header = () => {
       )}
 
       {temp && (
-        <div className="absolute flex justify-between  w-[100%] px-4 py-2 bg-gradient-to-b z-10 from-black">
+        <div className="absolute flex justify-between   bg-black sm:bg-blue-500 md:bg-green-400 flex-row   w-[100%] px-4 py-2 bg-gradient-to-b z-10 from-black">
           <img
-            className="w-40 cursor-pointer"
+            className="md:w-40 w-32  md:mx-0 cursor-pointer"
             onClick={handleHome}
             src={netflix_logo}
           />
 
           {
-            <div className="flex py-4">
-              <select
+            <div className="flex justify-between py-4">
+              {/* <select
                 onChange={handleLangChange}
                 className="mr-3 bg-opacity-70 bg-black text-white px-2 rounded-md"
               >
@@ -124,16 +124,16 @@ const Header = () => {
                 <option value="hi">हिंदी</option>
                 <option value="tel">తెలుగు</option>
                 <option value="kn">ಕನ್ನಡ</option>
-              </select>
+              </select> */}
               <button
                 onClick={handleToggleGPTSearch}
-                className="bg-violet-800 mr-6  rounded-lg text-white px-4 py-2"
+                className="bg-violet-800 mr-6  rounded-lg text-white md:px-4 px-2 py-1 md:py-2"
               >
                 {gptPage ? "Home" : "GptSearch"}
               </button>
               <div className="cursor-pointer">
                 <Avatar
-                  {...stringAvatar(temp?.displayName)}
+                  src={temp.photoURL}
                   sx={{ width: 45, height: 45, marginRight: 4 }}
                   onClick={handleSignOut}
                 ></Avatar>

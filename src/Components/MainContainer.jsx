@@ -13,7 +13,7 @@ const MainContainer = () => {
   console.log(tt);
 
   return (
-    <div>
+    <div className="md:pt-0 pt-[15%]">
       <VideoTitle id={id} title={title} overview={overview} />
       <VideoBackground id={id} />
     </div>

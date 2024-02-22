@@ -17,14 +17,15 @@ const useMovieTrailer = (id) => {
     const filterData = jsondata?.results?.filter(
       (movie) => movie?.type === "Trailer"
     );
-    console.log(filterData[0].key);
-    setVideoUrl(
-      "https://www.youtube.com/embed/" +
-        filterData[0].key +
-        "?playlist=" +
-        filterData[0].key +
-        "&loop=1&autoplay=1&mute=1"
-    );
+    console.log(filterData[0]?.key);
+    if (filterData[0]?.key)
+      setVideoUrl(
+        "https://www.youtube.com/embed/" +
+          filterData[0]?.key +
+          "?playlist=" +
+          filterData[0]?.key +
+          "&rel=0&loop=1&autoplay=1&mute=1"
+      );
   };
 
   useEffect(() => {

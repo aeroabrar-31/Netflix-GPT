@@ -14,12 +14,12 @@ const MovieCard = ({ poster_path, id }) => {
   };
 
   return (
-    <div className="w-48 p-2 mx-4 rounded-lg">
+    <div className="w-36 md:w-48 p-2 mx-4 rounded-lg">
       <img
         src={POSTER_IMG_URL + poster_path}
         alt="img broken"
         onClick={handleRedirectToWatch}
-        className="rounded-md cursor-pointer transform scale-100 transition-transform ease-in-out hover:scale-110"
+        className="rounded-md border-2 border-white cursor-pointer transform scale-100 transition-transform ease-in-out hover:scale-110"
       />
     </div>
   );

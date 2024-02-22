@@ -58,7 +58,6 @@ const Login = () => {
           .then((usercredentials) => {
             console.log(usercredentials.user);
             console.log("Successfully signed in with firebase auth");
-            navigate("/browse");
           })
           .catch((error) => {
             console.log(error);
@@ -120,7 +119,7 @@ const Login = () => {
   return (
     <div className="">
       <Header />
-      <img className="absolute" src={netflix_bg_img} alt="bgimage" />
+      <img className="fixed" src={netflix_bg_img} alt="bgimage" />
 
       <form
         onSubmit={(e) => e.preventDefault()}
@@ -158,8 +157,26 @@ const Login = () => {
         >
           {isSignIn ? "Sign Up" : "Sign In"}
         </button>
-        <p className="my-8 mx-2 cursor-pointer" onClick={handleSignIn}>
-          {!isSignIn ? "New to NetFlix ? Sign Up" : "Already a user ? Sign In"}
+        <p className="my-8 mx-2 " onClick={handleSignIn}>
+          {!isSignIn ? (
+            <div>
+              <h4>
+                New to NetFlix ?{" "}
+                <span className="cursor-pointer text-red-600 underline font-bold text-lg">
+                  Sign-Up
+                </span>
+              </h4>
+            </div>
+          ) : (
+            <div>
+              <h4>
+                Already a registered User ?{" "}
+                <span className="cursor-pointer text-red-600 underline font-bold text-lg">
+                  Sign-In
+                </span>
+              </h4>
+            </div>
+          )}
         </p>
       </form>
       <Snackbar

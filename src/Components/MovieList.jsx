@@ -1,11 +1,12 @@
 import React from "react";
 import MovieCard from "./MovieCard";
+import { Divider } from "@mui/material";
 
 const MovieList = ({ movies, title }) => {
   console.log(movies);
   return (
     <div className="mx-2">
-      <h1 className="text-3xl font-bold px-6  pt-6 pb-2 text-red-600">
+      <h1 className="text-xl md:text-3xl font-bold px-6  pt-4 pb-2 text-red-600">
         {title}
       </h1>
       <div className="flex overflow-x-scroll no-scrollbar">
@@ -15,6 +16,7 @@ const MovieList = ({ movies, title }) => {
           })}
         </div>
       </div>
+      <Divider sx={{ backgroundColor: "white" }} />
     </div>
   );
 };
