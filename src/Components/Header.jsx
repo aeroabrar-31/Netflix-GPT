@@ -107,7 +107,7 @@ const Header = () => {
       )}
 
       {temp && (
-        <div className="absolute flex justify-between   bg-black sm:bg-blue-500 md:bg-green-400 flex-row   w-[100%] px-4 py-2 bg-gradient-to-b z-10 from-black">
+        <div className="absolute flex justify-between   flex-row   w-[100%] px-4 py-2 bg-gradient-to-b z-10 from-black">
           <img
             className="md:w-40 w-32  md:mx-0 cursor-pointer"
             onClick={handleHome}

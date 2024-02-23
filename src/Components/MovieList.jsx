@@ -16,6 +16,7 @@ const MovieList = ({ movies, title }) => {
           })}
         </div>
       </div>
+      <br />
       <Divider sx={{ backgroundColor: "white" }} />
     </div>
   );

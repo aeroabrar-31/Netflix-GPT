@@ -119,32 +119,36 @@ const Login = () => {
   return (
     <div className="">
       <Header />
-      <img className="fixed" src={netflix_bg_img} alt="bgimage" />
+      <img
+        className="fixed h-screen object-cover"
+        src={netflix_bg_img}
+        alt="bgimage"
+      />
 
       <form
         onSubmit={(e) => e.preventDefault()}
-        className="absolute p-12 bg-opacity-80  bg-black w-[28%] mx-auto left-0 right-0 my-20 text-white rounded-lg"
+        className="absolute p-8 md:p-12 bg-opacity-80  bg-black w-[90%]  md:w-[28%] mx-auto left-0 right-0 my-20 text-white rounded-lg"
       >
-        <h1 className=" font-bold text-3xl py-4 mx-1">
+        <h1 className=" font-bold text-2xl md:text-3xl py-4 mx-1">
           {isSignIn ? "Sign Up" : "Sign In"}
         </h1>
         {isSignIn && (
           <input
-            className="p-3 mx-1 my-2 w-full bg-slate-900 border-white"
+            className="p-3 mx-1 my-2 w-full bg-slate-900 border-2 border-white rounded"
             type="text"
             ref={name}
             placeholder="Full Name"
           ></input>
         )}
         <input
-          className="p-3 mx-1 my-2 w-full bg-slate-900 border-white"
+          className="p-3 mx-1 my-2 w-full bg-slate-900 border-2 border-white rounded"
           type="email"
           ref={email}
           placeholder="ex:- abrar@gmail.com"
         ></input>
 
         <input
-          className="p-3 mx-1 my-2 w-full bg-slate-900"
+          className="p-3 mx-1 my-2 w-full bg-slate-900 border-2 border-white rounded"
           type="password"
           ref={password}
           placeholder="ex:- Password@123"
