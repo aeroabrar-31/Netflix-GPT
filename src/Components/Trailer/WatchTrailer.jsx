@@ -1,7 +1,7 @@
 import React from "react";
-import useMovieTrailer from "../hooks/useMovieTrailer";
+import useMovieTrailer from "../../hooks/useMovieTrailer";
 import { useSelector } from "react-redux";
-import Header from "./Header";
+import Header from "../Header";
 import TrailerHeader from "./TrailerHeader";
 
 const WatchTrailer = () => {

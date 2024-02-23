@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { API_OPTIONS } from "../utils/constants";
-import useMovieTrailer from "../hooks/useMovieTrailer";
+import { API_OPTIONS } from "../../utils/constants";
+import useMovieTrailer from "../../hooks/useMovieTrailer";
 
 const VideoBackground = ({ id }) => {
   // console.log("in video background " + id);

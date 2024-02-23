@@ -3,7 +3,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Login from "./Login";
 import Browse from "./Browse";
 import Error from "./Error";
-import WatchTrailer from "./WatchTrailer";
+import WatchTrailer from "./Trailer/WatchTrailer";
 
 const Body = () => {
   const appRouter = createBrowserRouter([

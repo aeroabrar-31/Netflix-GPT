@@ -1,5 +1,5 @@
 import React from "react";
-import MovieCard from "./MovieCard";
+import MovieCard from "../Secondary/MovieCard";
 
 const GptMovieList = ({ movies }) => {
   return (

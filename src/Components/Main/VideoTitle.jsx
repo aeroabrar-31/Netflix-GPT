@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { addTrailerId } from "../utils/gptSlice";
+import { addTrailerId } from "../../utils/gptSlice";
 
 const VideoTitle = ({ title, id, overview }) => {
   const navigate = useNavigate();

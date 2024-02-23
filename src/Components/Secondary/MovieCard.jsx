@@ -1,7 +1,7 @@
 import React from "react";
-import { POSTER_IMG_URL } from "../utils/constants";
+import { POSTER_IMG_URL } from "../../utils/constants";
 import { useDispatch } from "react-redux";
-import { addTrailerId } from "../utils/gptSlice";
+import { addTrailerId } from "../../utils/gptSlice";
 import { useNavigate } from "react-router-dom";
 
 const MovieCard = ({ poster_path, id }) => {

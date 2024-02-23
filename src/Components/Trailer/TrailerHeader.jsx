@@ -1,5 +1,5 @@
 import React from "react";
-import { netflix_logo } from "../utils/constants";
+import { netflix_logo } from "../../utils/constants";
 import { Avatar } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
