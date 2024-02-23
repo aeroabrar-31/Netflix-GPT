@@ -119,11 +119,13 @@ const Login = () => {
   return (
     <div className="">
       <Header />
-      <img
-        className="fixed h-screen object-cover"
-        src={netflix_bg_img}
-        alt="bgimage"
-      />
+      <div className="fixed">
+        <img
+          className="h-screen md:h-full object-cover"
+          src={netflix_bg_img}
+          alt="bgimage"
+        />
+      </div>
 
       <form
         onSubmit={(e) => e.preventDefault()}

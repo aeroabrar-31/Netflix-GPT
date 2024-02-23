@@ -101,8 +101,12 @@ const Header = () => {
   return (
     <div>
       {!temp && (
-        <div className="absolute cursor-pointer px-4 py-2 bg-gradient-to-b z-10 from-black">
-          <img className="w-40" onClick={handleHome} src={netflix_logo} />
+        <div className="absolute cursor-pointer bg-opacity-15 px-4 py-2 bg-gradient-to-b z-10 from-black">
+          <img
+            className="md:w-40 w-32 "
+            onClick={handleHome}
+            src={netflix_logo}
+          />
         </div>
       )}
 
