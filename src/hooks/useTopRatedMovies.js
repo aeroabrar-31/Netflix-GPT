@@ -3,7 +3,7 @@ import {
   addNowPlayingMovies,
   addPopularMovies,
   addTopRatedMovies,
-} from "../utils/movieSlice";
+} from "../utils/Slices/movieSlice";
 import { API_OPTIONS } from "../utils/constants";
 import { useEffect } from "react";
 

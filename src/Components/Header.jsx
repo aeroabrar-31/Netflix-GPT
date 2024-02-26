@@ -1,17 +1,26 @@
 import { signOut } from "firebase/auth";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { Avatar, Button, MenuItem, Select } from "@mui/material";
+import {
+  Avatar,
+  Button,
+  IconButton,
+  Menu,
+  MenuItem,
+  Select,
+} from "@mui/material";
 
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../Config/firebase";
 import { useDispatch } from "react-redux";
-import { addUser, removeUser } from "../utils/userSlice";
+import { addUser, removeUser } from "../utils/Slices/userSlice";
 import { netflix_logo } from "../utils/constants";
-import { toggleGpt } from "../utils/gptSlice";
-import { setLanguage } from "../utils/LanguageSlice";
+import { toggleGpt } from "../utils/Slices/gptSlice";
+import { setLanguage } from "../utils/Slices/LanguageSlice";
 import { langConst } from "../utils/langConstants";
+import { LogoutOutlined } from "@mui/icons-material";
+import { toast } from "react-toastify";
 
 function stringAvatar(name) {
   if (!name) return null;
@@ -86,7 +95,9 @@ const Header = () => {
 
   const handleSignOut = () => {
     signOut(auth)
-      .then(() => {})
+      .then(() => {
+        toast.warning("Logged out !");
+      })
       .catch((error) => {
         // An error happened.
         alert(error);
@@ -96,6 +107,20 @@ const Header = () => {
   // const navigate=useNavigate();
   const handleHome = () => {
     navigate("/browse");
+  };
+
+  const [openMenu, setOpenMenu] = useState(false);
+
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleMenu = (event) => {
+    setOpenMenu(true);
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+    setOpenMenu(false);
   };
 
   return (
@@ -131,17 +156,41 @@ const Header = () => {
               </select> */}
               <button
                 onClick={handleToggleGPTSearch}
-                className="bg-violet-800 mr-6  rounded-lg text-white md:px-4 px-2 py-1 md:py-2"
+                className=" mr-6  bg-gradient-to-r from-red-500 to-violet-500 hover:from-violet-500 hover:to-red-500 transition duration-300  rounded-lg text-white md:px-4 px-2 py-1 md:py-2"
               >
                 {gptPage ? "Home" : "GptSearch"}
               </button>
+              {/* <button class="px-6 py-3 text-white font-semibold rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400 bg-gradient-to-r from-red-500 to-violet-500">
+                Gradient Button
+              </button> */}
               <div className="cursor-pointer">
+                {/* <IconButton onClick={handleMenu}> */}
                 <Avatar
                   src={temp.photoURL}
                   sx={{ width: 45, height: 45, marginRight: 4 }}
                   onClick={handleSignOut}
+                  aria-controls={openMenu ? "basic-menu" : undefined}
+                  aria-haspopup="true"
+                  aria-expanded={openMenu ? "true" : undefined}
                 ></Avatar>
+                {/* </IconButton> */}
               </div>
+              <Menu
+                id="basic-menu"
+                open={openMenu}
+                // onClose={handleCloseMenu}
+                anchorEl={anchorEl}
+                onClose={handleClose}
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
+              >
+                <MenuItem dense onClick={handleSignOut}>
+                  <LogoutOutlined sx={{ marginRight: 1 }} />
+                  Logout
+                </MenuItem>
+              </Menu>
             </div>
           }
         </div>

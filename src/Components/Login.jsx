@@ -14,8 +14,9 @@ import { auth } from "../Config/firebase";
 import Slide from "@mui/material/Slide";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { addUser } from "../utils/userSlice";
+import { addUser } from "../utils/Slices/userSlice";
 import { netflix_bg_img, user_avatar } from "../utils/constants";
+import { ToastContainer, toast } from "react-toastify";
 
 function TransitionLeft(props) {
   return <Slide {...props} direction="left" />;
@@ -39,13 +40,8 @@ const Login = () => {
   const handleClickButton = () => {
     const message = ValidateData(email.current.value, password.current.value);
     console.log(message);
-    setOpenSnackBar("true");
-    setTransition(() => TransitionLeft);
 
     if (message === "true") {
-      setSever(true);
-      setSnackmsg("Success !!");
-
       if (!isSignIn) {
         //sign In logic
         console.log("sign in");
@@ -57,53 +53,58 @@ const Login = () => {
         )
           .then((usercredentials) => {
             console.log(usercredentials.user);
-            console.log("Successfully signed in with firebase auth");
+            toast.success("Logged in Successfully");
           })
           .catch((error) => {
-            console.log(error);
+            toast.error(error.code.substring(5));
           });
       } else {
         //sign Up logic
-        console.log("sign up");
-        createUserWithEmailAndPassword(
-          auth,
-          email.current.value,
-          password.current.value
-        )
-          .then((usercredential) => {
-            console.log(usercredential);
-            setSignIn(!isSignIn);
+        if (name.current.value.length > 0) {
+          console.log("sign up");
+          createUserWithEmailAndPassword(
+            auth,
+            email.current.value,
+            password.current.value
+          )
+            .then((usercredential) => {
+              console.log(usercredential);
+              toast.success("Signed Up successfully !");
+              setSignIn(!isSignIn);
 
-            updateProfile(usercredential.user, {
-              displayName: name?.current?.value,
-              // photoURL: user_avatar,
-            })
-              .then(() => {
-                const { uid, email, displayName, photoURL } = auth.currentUser;
-
-                const userObj = {
-                  uid: uid,
-                  email: email,
-                  displayName: displayName,
-                  photoURL: photoURL,
-                };
-
-                dispatch(addUser(userObj));
-                console.log(
-                  "user profile display name and photoUrl added successfully"
-                );
+              updateProfile(usercredential.user, {
+                displayName: name?.current?.value,
+                // photoURL: user_avatar,
               })
-              .catch((error) => {
-                alert(error);
-              });
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+                .then(() => {
+                  const { uid, email, displayName, photoURL } =
+                    auth.currentUser;
+
+                  const userObj = {
+                    uid: uid,
+                    email: email,
+                    displayName: displayName,
+                    photoURL: photoURL,
+                  };
+
+                  dispatch(addUser(userObj));
+                  console.log(
+                    "user profile display name and photoUrl added successfully"
+                  );
+                })
+                .catch((error) => {
+                  alert(error);
+                });
+            })
+            .catch((error) => {
+              toast.error(error.code.substring(5));
+            });
+        } else {
+          toast.error("Name can't be empty !");
+        }
       }
     } else {
-      setSnackmsg(message);
-      setSever(false);
+      toast.error(message);
     }
   };
 
@@ -191,7 +192,7 @@ const Login = () => {
         onClose={handleClose}
         anchorOrigin={{ vertical: "top", horizontal: "right" }}
         TransitionComponent={transition}
-        autoHideDuration={2000}
+        autoHideDuration={3000}
       >
         <Alert
           variant="filled"

@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { langConst } from "../../utils/langConstants";
 import { useDispatch, useSelector } from "react-redux";
 import { API_OPTIONS, openAI } from "../../utils/constants";
-import { addMovieNames, addMovies } from "../../utils/suggestionsSlice";
+import { addMovieNames, addMovies } from "../../utils/Slices/suggestionsSlice";
 import { LoadingButton } from "@mui/lab";
 import { Search } from "@mui/icons-material";
 
