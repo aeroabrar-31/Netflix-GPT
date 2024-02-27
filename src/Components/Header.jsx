@@ -5,6 +5,9 @@ import { useSelector } from "react-redux";
 import {
   Avatar,
   Button,
+  Dialog,
+  DialogActions,
+  DialogTitle,
   IconButton,
   Menu,
   MenuItem,
@@ -109,26 +112,22 @@ const Header = () => {
     navigate("/browse");
   };
 
-  const [openMenu, setOpenMenu] = useState(false);
+  const [open, setOpen] = React.useState(false);
 
-  const [anchorEl, setAnchorEl] = useState(null);
-
-  const handleMenu = (event) => {
-    setOpenMenu(true);
-    setAnchorEl(event.currentTarget);
+  const handleClickOpen = () => {
+    setOpen(true);
   };
 
   const handleClose = () => {
-    setAnchorEl(null);
-    setOpenMenu(false);
+    setOpen(false);
   };
 
   return (
     <div>
       {!temp && (
-        <div className="absolute cursor-pointer bg-opacity-15 px-4 py-2 bg-gradient-to-b z-10 from-black">
+        <div className="absolute  bg-opacity-15 px-4 py-2 bg-gradient-to-b z-10 from-black">
           <img
-            className="md:w-40 w-32 "
+            className="md:w-40 w-32 cursor-pointer"
             onClick={handleHome}
             src={netflix_logo}
           />
@@ -136,7 +135,7 @@ const Header = () => {
       )}
 
       {temp && (
-        <div className="absolute flex justify-between md:bg-inherit bg-black  flex-row   w-[100%] px-4 py-2 bg-gradient-to-b z-10 from-black">
+        <div className="absolute flex justify-between md:bg-inherit bg-black  flex-row   w-[100%] px-4 py-2 md:bg-gradient-to-b z-10 md:from-black">
           <img
             className="md:w-40 w-32  md:mx-0 cursor-pointer"
             onClick={handleHome}
@@ -168,33 +167,45 @@ const Header = () => {
                 <Avatar
                   src={temp.photoURL}
                   sx={{ width: 45, height: 45, marginRight: 4 }}
-                  onClick={handleSignOut}
-                  aria-controls={openMenu ? "basic-menu" : undefined}
-                  aria-haspopup="true"
-                  aria-expanded={openMenu ? "true" : undefined}
+                  onClick={handleClickOpen}
                 ></Avatar>
                 {/* </IconButton> */}
               </div>
-              <Menu
-                id="basic-menu"
-                open={openMenu}
-                // onClose={handleCloseMenu}
-                anchorEl={anchorEl}
-                onClose={handleClose}
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "left",
-                }}
-              >
-                <MenuItem dense onClick={handleSignOut}>
-                  <LogoutOutlined sx={{ marginRight: 1 }} />
-                  Logout
-                </MenuItem>
-              </Menu>
             </div>
           }
         </div>
       )}
+      <Dialog
+        sx={{
+          color: "white",
+          "& .MuiPaper-root": {
+            background: "#363636",
+          },
+          "& .MuiBackdrop-root": {
+            backgroundColor: "transparent", // Try to remove this to see the result
+          },
+        }}
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle
+          sx={{ textDecorationColor: "white", color: "white" }}
+          id="alert-dialog-title"
+        >
+          Do you want to Logout?
+        </DialogTitle>
+
+        <DialogActions>
+          <Button onClick={handleClose} variant="contained" color="primary">
+            No
+          </Button>
+          <Button onClick={handleSignOut} variant="contained" color="error">
+            Logout
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };

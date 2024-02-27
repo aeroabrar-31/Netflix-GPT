@@ -106,7 +106,7 @@ const GptSearchBar = () => {
         </div> */}
         <button
           onClick={handleSearch}
-          className="bg-red-600 text-lg col-span-3 rounded-md text-white md:px-4 py-1 px-5  m-4"
+          className="bg-red-600 md:text-lg text-sm col-span-3 rounded-md text-white md:px-4 py-1 px-3  m-4"
         >
           {langConst[langKey].search}
         </button>

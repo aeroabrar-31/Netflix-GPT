@@ -3,10 +3,12 @@ import useMovieTrailer from "../../hooks/useMovieTrailer";
 import { useSelector } from "react-redux";
 import Header from "../Header";
 import TrailerHeader from "./TrailerHeader";
+import { netflix_bg_img } from "../../utils/constants";
 
 const WatchTrailer = () => {
   const trailerId = useSelector((store) => store.gpt.trailerId);
   const videoUrl = useMovieTrailer(trailerId);
+
   if (!videoUrl)
     return (
       <>
@@ -22,9 +24,16 @@ const WatchTrailer = () => {
   return (
     <div>
       <TrailerHeader />
-      <div className="md:pt-0 pt-[15%]">
+      <div className="fixed">
+        <img
+          className="h-screen md:h-full object-cover"
+          src={netflix_bg_img}
+          alt="bgimage"
+        />
+      </div>
+      <div className="  md:pt-0 pt-[10%]">
         <iframe
-          className=" w-[100%] md:aspect-video aspect-square"
+          className="absolute w-[100%] md:aspect-video aspect-square"
           src={videoUrl}
           title="YouTube video player"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

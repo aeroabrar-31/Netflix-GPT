@@ -147,6 +147,7 @@ const Login = () => {
           className="p-3 mx-1 my-2 w-full bg-slate-900 border-2 border-white rounded"
           type="email"
           ref={email}
+          value={"teja@gmail.com"}
           placeholder="ex:- abrar@gmail.com"
         ></input>
 
@@ -154,13 +155,14 @@ const Login = () => {
           className="p-3 mx-1 my-2 w-full bg-slate-900 border-2 border-white rounded"
           type="password"
           ref={password}
+          value={"Teja@123"}
           placeholder="ex:- Password@123"
         ></input>
 
         <button
           type="submit"
           onClick={handleClickButton}
-          className=" p-2 rounded-sm bg-red-600 text-white  mx-1 my-4 w-full"
+          className=" p-2 rounded-sm bg-red-600 hover:bg-red-700 text-white  mx-1 my-4 w-full"
         >
           {isSignIn ? "Sign Up" : "Sign In"}
         </button>
@@ -168,8 +170,8 @@ const Login = () => {
           {!isSignIn ? (
             <div>
               <h4>
-                New to NetFlix ?{" "}
-                <span className="cursor-pointer text-red-600 underline font-bold text-lg">
+                New to NetFlix ? &nbsp;{" "}
+                <span className="cursor-pointer text-red-500 underline font-bold text-lg">
                   Sign-Up
                 </span>
               </h4>
@@ -177,8 +179,8 @@ const Login = () => {
           ) : (
             <div>
               <h4>
-                Already a registered User ?{" "}
-                <span className="cursor-pointer text-red-600 underline font-bold text-lg">
+                Already a registered User ? &nbsp;{" "}
+                <span className="cursor-pointer text-red-500 underline font-bold text-lg">
                   Sign-In
                 </span>
               </h4>

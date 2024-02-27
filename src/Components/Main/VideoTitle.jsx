@@ -7,13 +7,17 @@ const VideoTitle = ({ title, id, overview }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  if (overview.length > 300) {
+    overview = overview.substring(0, 300) + ".";
+  }
+
   const handleRedirectToWatch = () => {
     dispatch(addTrailerId(id));
     navigate("/watch");
   };
   return (
-    <div className="w-screen aspect-video pt-[15%] md:px-12 px-5 absolute bg-gradient-to-r from-black text-white">
-      <h1 className="font-bold text-xl pt-10 md:pt-0 md:text-3xl">{title}</h1>
+    <div className="w-screen md:aspect-video aspect-square pt-[25%] md:pt-[15%] md:px-12 px-5 absolute bg-gradient-to-r from-black text-white">
+      <h1 className="font-bold text-xl  pt-10 md:pt-0 md:text-3xl">{title}</h1>
       <h1 className="w-[25%] md:inline-block hidden py-5">{overview}</h1>
 
       <div>
