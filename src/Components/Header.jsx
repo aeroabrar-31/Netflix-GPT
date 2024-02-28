@@ -159,17 +159,13 @@ const Header = () => {
               >
                 {gptPage ? "Home" : "GptSearch"}
               </button>
-              {/* <button class="px-6 py-3 text-white font-semibold rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400 bg-gradient-to-r from-red-500 to-violet-500">
-                Gradient Button
-              </button> */}
+
               <div className="cursor-pointer">
-                {/* <IconButton onClick={handleMenu}> */}
                 <Avatar
                   src={temp.photoURL}
-                  sx={{ width: 45, height: 45, marginRight: 4 }}
+                  sx={{ width: 45, height: 45, marginRight: 2 }}
                   onClick={handleClickOpen}
                 ></Avatar>
-                {/* </IconButton> */}
               </div>
             </div>
           }

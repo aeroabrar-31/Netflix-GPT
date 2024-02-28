@@ -147,7 +147,7 @@ const Login = () => {
           className="p-3 mx-1 my-2 w-full bg-slate-900 border-2 border-white rounded"
           type="email"
           ref={email}
-          value={"teja@gmail.com"}
+          // value={"teja@gmail.com"}
           placeholder="ex:- abrar@gmail.com"
         ></input>
 
@@ -155,7 +155,7 @@ const Login = () => {
           className="p-3 mx-1 my-2 w-full bg-slate-900 border-2 border-white rounded"
           type="password"
           ref={password}
-          value={"Teja@123"}
+          // value={"Teja@123"}
           placeholder="ex:- Password@123"
         ></input>
 

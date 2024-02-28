@@ -19,7 +19,7 @@ const Browse = () => {
   console.log(gptFLag);
 
   return (
-    <div className="no-scrollbar">
+    <div className="no-scrollbar w-screen">
       <Header />
       {gptFLag ? (
         <GptPage />
