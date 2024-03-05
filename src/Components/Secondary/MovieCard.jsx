@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 const MovieCard = ({ poster_path, id }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  if (!poster_path) return;
 
   const handleRedirectToWatch = () => {
     dispatch(addTrailerId(id));

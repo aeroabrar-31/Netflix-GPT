@@ -13,6 +13,13 @@ import {
   MenuItem,
   Select,
 } from "@mui/material";
+import {
+  blue,
+  deepOrange,
+  deepPurple,
+  deepRed,
+  red,
+} from "@mui/material/colors";
 
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../Config/firebase";
@@ -27,32 +34,16 @@ import { toast } from "react-toastify";
 
 function stringAvatar(name) {
   if (!name) return null;
+
+  let spl = name.split(" ");
+  let tt = "";
+
+  if (spl.length == 1) tt = spl[0][0] + spl[0][spl[0].length - 1].toUpperCase();
+  else tt = `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`;
+
   return {
-    sx: {
-      bgcolor: stringToColor(name),
-    },
-    children: `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`,
+    children: tt,
   };
-}
-function stringToColor(string) {
-  if (!string) return;
-  let hash = 0;
-  let i;
-
-  /* eslint-disable no-bitwise */
-  for (i = 0; i < string.length; i += 1) {
-    hash = string.charCodeAt(i) + ((hash << 5) - hash);
-  }
-
-  let color = "#";
-
-  for (i = 0; i < 3; i += 1) {
-    const value = (hash >> (i * 8)) & 0xff;
-    color += `00${value.toString(16)}`.slice(-2);
-  }
-  /* eslint-enable no-bitwise */
-
-  return color;
 }
 
 const Header = () => {
@@ -162,8 +153,14 @@ const Header = () => {
 
               <div className="cursor-pointer">
                 <Avatar
-                  src={temp.photoURL}
-                  sx={{ width: 45, height: 45, marginRight: 2 }}
+                  // src={temp?.photoURL}
+                  {...stringAvatar(temp?.displayName)}
+                  sx={{
+                    width: 45,
+                    height: 45,
+                    marginRight: 2,
+                    bgcolor: deepOrange[400],
+                  }}
                   onClick={handleClickOpen}
                 ></Avatar>
               </div>

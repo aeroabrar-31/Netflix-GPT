@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { addTrailerId } from "../../utils/Slices/gptSlice";
@@ -11,6 +11,12 @@ const VideoTitle = ({ title, id, overview }) => {
     overview = overview.substring(0, 300) + ".";
   }
 
+  const [showOverview, setShowOverview] = useState(false);
+
+  const handleShow = () => {
+    setShowOverview(!showOverview);
+  };
+
   const handleRedirectToWatch = () => {
     dispatch(addTrailerId(id));
     navigate("/watch");
@@ -18,17 +24,22 @@ const VideoTitle = ({ title, id, overview }) => {
   return (
     <div className="w-screen md:aspect-video aspect-square pt-[25%] md:pt-[15%] md:px-12 px-5 absolute bg-gradient-to-r from-black text-white">
       <h1 className="font-bold text-xl  pt-10 md:pt-0 md:text-3xl">{title}</h1>
-      <h1 className="w-[25%] md:inline-block hidden py-5">{overview}</h1>
+      {showOverview && (
+        <h1 className="w-[25%] md:inline-block hidden py-5">{overview}</h1>
+      )}
 
-      <div>
+      <div className="md:mt-2">
         <button
           onClick={handleRedirectToWatch}
-          className="bg-gray-700 bg-opacity-70 rounded-md text-white px-3 md:mt-0 mt-2 py-2 md:px-7 md:py-3 md:mr-2"
+          className=" bg-white bg-opacity-80 rounded-sm text-black px-1 py-2 md:px-4 md:py-2 md:mt-0 mt-2  md:mr-2"
         >
           ▶️ Play
         </button>
-        <button className="bg-gray-700 bg-opacity-70 md:inline-block hidden rounded-md text-white px-5 py-3">
-          ℹ️ More info
+        <button
+          onClick={handleShow}
+          className="bg-gray-700 bg-opacity-70 md:inline-block hidden rounded-sm text-white py-2 md:px-4 md:py-2 px-1"
+        >
+          {showOverview ? "Hide info" : " ℹ️ More info"}
         </button>
       </div>
     </div>

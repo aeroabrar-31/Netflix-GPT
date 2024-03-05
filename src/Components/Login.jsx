@@ -8,6 +8,7 @@ import {
   signInWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
+import { sendPasswordResetEmail } from "firebase/auth";
 
 import { auth } from "../Config/firebase";
 
@@ -116,6 +117,27 @@ const Login = () => {
   const handleClose = (event, reason) => {
     setOpenSnackBar("false");
   };
+  const auth = getAuth();
+  // const email=
+
+  const handleForgotPassword = () => {
+    if (email.current.value) {
+      sendPasswordResetEmail(auth, email.current.value)
+        .then(() => {
+          toast.success("Password reset mail sent Successfully !");
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          // ..
+          console.log("====================================");
+          console.log(error);
+          console.log("====================================");
+        });
+    } else {
+      toast.error("Please enter your email");
+    }
+  };
 
   return (
     <div className="">
@@ -130,7 +152,7 @@ const Login = () => {
 
       <form
         onSubmit={(e) => e.preventDefault()}
-        className="absolute p-8 md:p-12 bg-opacity-80  bg-black w-[90%]  md:w-[28%] mx-auto left-0 right-0 my-20 text-white rounded-lg"
+        className="absolute p-8 md:p-12 bg-opacity-80  bg-black w-[90%]  md:w-[450px] mx-auto left-0 right-0 my-20 text-white rounded-lg"
       >
         <h1 className=" font-bold text-2xl md:text-3xl py-4 mx-1">
           {isSignIn ? "Sign Up" : "Sign In"}
@@ -140,7 +162,7 @@ const Login = () => {
             className="p-3 mx-1 my-2 w-full bg-slate-900 border-2 border-white rounded"
             type="text"
             ref={name}
-            placeholder="Full Name"
+            placeholder="ex:- John Williams"
           ></input>
         )}
         <input
@@ -166,12 +188,17 @@ const Login = () => {
         >
           {isSignIn ? "Sign Up" : "Sign In"}
         </button>
-        <p className="my-8 mx-2 " onClick={handleSignIn}>
+        {!isSignIn && (
+          <p className="ml-[30%] hover:underline cursor-pointer">
+            <h4 onClick={handleForgotPassword}>Forgot Password ?</h4>
+          </p>
+        )}
+        <p className="my-6 mx-2 " onClick={handleSignIn}>
           {!isSignIn ? (
             <div>
               <h4>
                 New to NetFlix ? &nbsp;{" "}
-                <span className="cursor-pointer text-red-500 underline font-bold text-lg">
+                <span className="cursor-pointer text-red-500 hover:underline font-bold text-lg">
                   Sign-Up
                 </span>
               </h4>
@@ -180,7 +207,7 @@ const Login = () => {
             <div>
               <h4>
                 Already a registered User ? &nbsp;{" "}
-                <span className="cursor-pointer text-red-500 underline font-bold text-lg">
+                <span className="cursor-pointer text-red-500 hover:underline font-bold text-lg">
                   Sign-In
                 </span>
               </h4>
