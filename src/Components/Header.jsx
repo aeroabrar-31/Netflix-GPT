@@ -58,7 +58,6 @@ const Header = () => {
   const gptPage = useSelector((store) => store.gpt.gpt);
 
   const handleLangChange = (e) => {
-    console.log(e.target.value);
     dispatch(setLanguage(e.target.value));
   };
 

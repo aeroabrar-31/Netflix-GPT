@@ -38,7 +38,14 @@ const GptSearchBar = () => {
     const movieArray = moviesString.split(", ");
     console.log(movieArray);
 
-    const promisearray = movieArray.map((movie) => {
+    let cleanedMoviesList = movieArray.map(function (movie) {
+      return movie.replace(/\d+\.\s+/g, "").replace(/\n/g, "");
+    });
+
+    console.log("====================================");
+    console.log(cleanedMoviesList);
+    console.log("====================================");
+    const promisearray = cleanedMoviesList.map((movie) => {
       return fetchMovieDetails(movie);
     });
     fullfillPromises(promisearray);
@@ -106,7 +113,7 @@ const GptSearchBar = () => {
         </div> */}
         <button
           onClick={handleSearch}
-          className="bg-red-600 md:text-lg text-sm col-span-3 rounded-md text-white md:px-4 py-1 px-3  m-4"
+          className="bg-red-600 hover:bg-red-700 md:text-lg text-sm col-span-3 rounded-md text-white md:px-4 py-1 px-3  m-4"
         >
           {langConst[langKey].search}
         </button>

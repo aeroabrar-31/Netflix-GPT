@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   addNowPlayingMovies,
   addPopularMovies,
@@ -10,6 +10,7 @@ import { useEffect } from "react";
 
 export const useUpcomingMovies = () => {
   const dispatch = useDispatch();
+  const movies = useSelector((store) => store.movies.upcomingMovies);
   const fetchUpcomingMovies = async () => {
     const data = await fetch(
       "https://api.themoviedb.org/3/movie/upcoming",
@@ -21,6 +22,11 @@ export const useUpcomingMovies = () => {
   };
 
   useEffect(() => {
-    fetchUpcomingMovies();
+    if (!movies) {
+      console.log("====================================");
+      console.log("Memoization upcoming");
+      console.log("====================================");
+      fetchUpcomingMovies();
+    }
   }, []);
 };

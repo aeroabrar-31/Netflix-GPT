@@ -10,9 +10,31 @@ import {
   DialogContentText,
   DialogTitle,
 } from "@mui/material";
+import {
+  blue,
+  deepOrange,
+  deepPurple,
+  deepRed,
+  red,
+} from "@mui/material/colors";
 import { signOut } from "firebase/auth";
 import { auth } from "../../Config/firebase";
 import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
+
+function stringAvatar(name) {
+  if (!name) return null;
+
+  let spl = name.split(" ");
+  let tt = "";
+
+  if (spl.length == 1) tt = spl[0][0] + spl[0][spl[0].length - 1].toUpperCase();
+  else tt = `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`;
+
+  return {
+    children: tt,
+  };
+}
 
 const TrailerHeader = () => {
   const navigate = useNavigate();
@@ -44,7 +66,7 @@ const TrailerHeader = () => {
       });
   };
   const gptPage = true;
-  const temp = null;
+  const temp = useSelector((state) => state.userDetails);
   return (
     <div>
       <div className="absolute flex justify-between bg-black   flex-row   w-[100%] px-4 py-1  z-10">
@@ -58,8 +80,14 @@ const TrailerHeader = () => {
           <div className="flex py-4">
             <div className="cursor-pointer">
               <Avatar
-                src={temp?.photoURL}
-                sx={{ width: 45, height: 45, marginRight: 4 }}
+                // src={temp?.photoURL}
+                {...stringAvatar(temp?.displayName)}
+                sx={{
+                  width: 45,
+                  height: 45,
+                  marginRight: 4,
+                  bgcolor: deepOrange[400],
+                }}
                 // onClick={handleSignOut}
                 onClick={handleClickOpen}
               ></Avatar>

@@ -16,7 +16,6 @@ const Browse = () => {
   useUpcomingMovies();
 
   const gptFLag = useSelector((store) => store.gpt.gpt);
-  console.log(gptFLag);
 
   return (
     <div className="no-scrollbar w-screen">

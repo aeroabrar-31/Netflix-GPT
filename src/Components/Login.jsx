@@ -162,7 +162,7 @@ const Login = () => {
             className="p-3 mx-1 my-2 w-full bg-slate-900 border-2 border-white rounded"
             type="text"
             ref={name}
-            placeholder="ex:- John Williams"
+            placeholder="John Williams"
           ></input>
         )}
         <input
@@ -170,7 +170,7 @@ const Login = () => {
           type="email"
           ref={email}
           // value={"teja@gmail.com"}
-          placeholder="ex:- abrar@gmail.com"
+          placeholder="abrar@gmail.com"
         ></input>
 
         <input
@@ -178,7 +178,7 @@ const Login = () => {
           type="password"
           ref={password}
           // value={"Teja@123"}
-          placeholder="ex:- Password@123"
+          placeholder="Password@123"
         ></input>
 
         <button

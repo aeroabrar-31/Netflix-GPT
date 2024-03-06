@@ -4,7 +4,7 @@ import MovieCard from "../Secondary/MovieCard";
 const GptMovieList = ({ movies }) => {
   return (
     <div>
-      <div className="bg-black bg-opacity-65 p-10 m-5 ">
+      <div className="bg-black bg-opacity-65 md:p-10 p-1 mx-20 my-5 ">
         <div className="flex  flex-wrap justify-center">
           {movies.map((movie) => {
             return (
