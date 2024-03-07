@@ -15,9 +15,17 @@ const suggestionSlice = createSlice({
     addMovies: (state, action) => {
       state.movies = action.payload;
     },
+
+    removeMovieNames: (state) => {
+      state.movieNames = null;
+    },
+    removeMovies: (state) => {
+      state.movies = null;
+    },
   },
 });
 
-export const { addMovies, addMovieNames } = suggestionSlice.actions;
+export const { addMovies, addMovieNames, removeMovieNames, removeMovies } =
+  suggestionSlice.actions;
 
 export default suggestionSlice.reducer;

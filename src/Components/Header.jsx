@@ -31,6 +31,10 @@ import { setLanguage } from "../utils/Slices/LanguageSlice";
 import { langConst } from "../utils/langConstants";
 import { LogoutOutlined } from "@mui/icons-material";
 import { toast } from "react-toastify";
+import {
+  removeMovieNames,
+  removeMovies,
+} from "../utils/Slices/suggestionsSlice";
 
 function stringAvatar(name) {
   if (!name) return null;
@@ -79,6 +83,8 @@ const Header = () => {
         dispatch(addUser(userObj));
       } else {
         dispatch(removeUser());
+        dispatch(removeMovieNames());
+        dispatch(removeMovies());
         navigate("/");
       }
     });
